@@ -15,6 +15,7 @@ $(function() {
 
   var $loginPage = $('.login.page'); // The login page
   var $chatPage = $('.chat.page'); // The chatroom page
+  var $fullPage = $('.full.page'); // The chatroom page
 
   // Prompt for setting a username
   var username;
@@ -227,13 +228,22 @@ $(function() {
 
   // Whenever the server emits 'login', log the login message
   socket.on('login', function (data) {
-    connected = true;
-    // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
-    log(message, {
-      prepend: true
-    });
-    addParticipantsMessage(data);
+
+    if (data.numUsers != -1) {
+      connected = true;
+      // Display the welcome message
+      var message = "Welcome to Socket.IO Chat – ";
+      log(message, {
+        prepend: true
+      });
+      addParticipantsMessage(data);
+    } else {
+      $chatPage.fadeOut();
+      $fullPage.show();
+      $chatPage.off('click');
+      
+    }
+    
   });
 
   // Whenever the server emits 'new message', update the chat body

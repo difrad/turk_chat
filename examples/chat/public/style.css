@@ -50,6 +50,19 @@ ul {
 
 .login.page {
   background-color: #000;
+
+}
+
+.full.page {
+  background-color: #000;
+  display: none;
+  font-size: 200%;
+  text-align: center;
+}
+
+.full.page .title, .full.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
 }
 
 .login.page .form {
